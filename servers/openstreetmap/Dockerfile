@@ -6,6 +6,13 @@ ENV THREADS=4
 # Niveau de zoom maxi généré à la volée (tu peux limiter à 14–16 si besoin)
 ENV MAX_ZOOM=19
 
+# Copie et exécution du script de préparation
+COPY prepare.sh /usr/local/bin/prepare.sh
+RUN chmod +x /usr/local/bin/prepare.sh
+
+# Ajout du script de préparation à l'exécution
+RUN sed -i '1a\\\n/usr/local/bin/prepare.sh' /usr/local/bin/run.sh
+
 # Copie et exécution du script de nettoyage
 COPY cleanup.sh /usr/local/bin/cleanup.sh
 RUN chmod +x /usr/local/bin/cleanup.sh
