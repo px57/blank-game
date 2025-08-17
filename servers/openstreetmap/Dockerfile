@@ -6,6 +6,10 @@ ENV THREADS=4
 # Niveau de zoom maxi généré à la volée (tu peux limiter à 14–16 si besoin)
 ENV MAX_ZOOM=19
 
-# Rien d’autre n’est requis : l’image contient osm2pgsql, renderd, Apache, style OSM Carto.
-# Le style par défaut sera utilisé (modifiable, voir notes plus bas).
+# Copie et exécution du script de nettoyage
+COPY cleanup.sh /usr/local/bin/cleanup.sh
+RUN chmod +x /usr/local/bin/cleanup.sh
+
+# Ajout du script de nettoyage à l'exécution
+RUN echo "/usr/local/bin/cleanup.sh" >> /usr/local/bin/run.sh
 
