@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  tileserver:
+    build:
+      context: ./servers/openstreetmap
+      dockerfile: Dockerfile
+    container_name: tileserver-gl
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      # Tu stockes les données .mbtiles et éventuellement config.json ici
+      - ./servers/openstreetmap/data:/data:rw
+
